@@ -1,0 +1,60 @@
+<h2 class="text-center">View Task</h2>
+<form>
+  <div class="form-group">
+    <label for="projectId">Project:</label>
+    <input [(ngModel)]="projectId" placeholder="Project ID" name="projectId" class="form-control" id="projectId">
+  </div>
+    <button class="btn btn-success" (click)="getTasks(projectId)">Search</button>
+</form>
+
+<h2> Task Details</h2>
+
+            Sort by:
+        <span (click)="sortList('startDate')" class="by-name">Start Date</span>
+          <span *ngIf="key === 'startDate'">
+            <span *ngIf="reverse"></span>
+            <span *ngIf="!reverse"></span>
+          </span>
+
+          <span (click)="sortList('endDate')" class="by-name">End Date</span>
+            <span *ngIf="key === 'endDate'">
+              <span *ngIf="reverse"></span>
+              <span *ngIf="!reverse"></span>
+          </span>
+
+          <span (click)="sortList('priority')" class="by-name">Priority</span>
+            <span *ngIf="key === 'priority'">
+              <span *ngIf="reverse"></span>
+              <span *ngIf="!reverse"></span>
+          </span>
+
+          <span (click)="sortList('status')" class="by-name">Completed</span>
+            <span *ngIf="key === 'status'">
+              <span *ngIf="reverse"></span>
+              <span *ngIf="!reverse"></span>
+          </span>
+
+          
+<table class="table table-bordered">
+  <thead>
+  <tr>
+    <th>Task Name </th>
+    <th>Parent Task </th>
+    <th>Priority</th>
+    <th>Start Date</th>
+    <th>End Date</th>
+    <th>Status</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let task of tasks | orderBy: key : reverse">
+    <td>{{task.taskName}}</td>
+    <td>{{task.parent.parentTask}}</td>
+    <td>{{task.priority}}</td>
+    <td>{{task.startDate | date: 'MM-dd-yyyy'}}</td>
+    <td>{{task.endDate | date: 'MM-dd-yyyy'}}</td>
+    <td>{{task.status}}</td>
+    <td><button class="btn btn-danger" (click)="updateTask(task)"> End Task</button></td>
+  </tr>
+  </tbody>
+</table>

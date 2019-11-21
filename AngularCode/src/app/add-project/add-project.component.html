@@ -1,0 +1,88 @@
+<h2 class="text-center">Add Project</h2>
+<form #yourForm="ngForm" >
+  <div class="form-group">
+    <label for="projectName">Project:</label>
+    <input [(ngModel)]="project.projectName" placeholder="Project" name="projectName" class="form-control" id="projectName">
+  </div>
+  <div class="form-group">
+    <label for="startDate">Start Date:</label>
+    <input type="date" [(ngModel)]="project.startDate" [disabled]="!project.selectDate"  placeholder="StartDate" name="startDate" class="date" id="startDate" >
+  </div>
+  <div class="form-group">
+    <label for="endDate">End Date:</label>
+    <input type="date" [(ngModel)]="project.endDate" [disabled]="!project.selectDate" placeholder="EndDate" name="endDate" class="date" id="endDate" >
+  </div>
+  <input type="checkbox" [(ngModel)]="project.selectDate" name="project.selectDate">  Select Start and End Date
+  <div class="form-group">
+    <label for="priority">Priority:</label>
+   <input type="range" [(ngModel)]="project.priority" placeholder="Priority" name="priority"  min="1" max="10" step="1"  class="form-control" id="priority" >
+  </div>
+  <div class="form-group">
+    <label for="employeeId">Employee ID:</label>
+    <input [(ngModel)]="project.employeeId" placeholder="Emplaoyee ID" name="employeeId" class="form-control" id="employeeId">
+  </div>
+
+  <div class="form-group" hidden>
+    <label for="projectId">Project Id:</label>
+    <input  [(ngModel)]="project.projectId" placeholder="Project ID" name="projectId" class="form-control" id="projectId">
+  </div>
+    <button class="btn btn-success" (click)="createProject()">{{buttonName}}</button>
+    <div class="text-danger" *ngIf="error.isError">{{error.errorMessage}}</div>
+</form>
+
+<h2> Project Details</h2>
+
+            Sort by:
+        <span (click)="sortList('projectName')" class="by-name">ProjectName</span>
+          <span *ngIf="key === 'projectName'">
+            <span *ngIf="reverse"></span>
+            <span *ngIf="!reverse"></span>
+          </span>
+
+          <span (click)="sortList('startDate')" class="by-name">Start Date</span>
+            <span *ngIf="key === 'startDate'">
+              <span *ngIf="reverse"></span>
+              <span *ngIf="!reverse"></span>
+          </span>
+
+          <span (click)="sortList('endDate')" class="by-name">End Date</span>
+            <span *ngIf="key === 'endDate'">
+              <span *ngIf="reverse"></span>
+              <span *ngIf="!reverse"></span>
+          </span>
+
+          <span (click)="sortList('priority')" class="by-name">Priority</span>
+            <span *ngIf="key === 'priority'">
+              <span *ngIf="reverse"></span>
+              <span *ngIf="!reverse"></span>
+          </span>
+
+          <span (click)="sortList('employeeId')" class="by-name">Employee ID</span>
+            <span *ngIf="key === 'employeeId'">
+              <span *ngIf="reverse"></span>
+              <span *ngIf="!reverse"></span>
+          </span>
+
+<table class="table table-bordered">
+  <thead>
+  <tr>
+    <th>ProjectId </th>
+    <th>Project </th>
+    <th>Start Date</th>
+    <th>End Date</th>
+    <th>Priority</th>
+    <th>Employee ID</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let project of projects | orderBy: key : reverse">
+    <td>{{project.projectId}}</td>
+    <td>{{project.projectName}}</td>
+    <td>{{project.startDate | date: 'MM-dd-yyyy'}}</td>
+    <td>{{project.endDate | date: 'MM-dd-yyyy'}}</td>
+    <td>{{project.priority}}</td>
+    <td>{{project.employeeId}}</td>
+    <td><button class="btn btn-danger" (click)="updateProject(project)"> Update Project</button></td>
+  </tr>
+  </tbody>
+</table>

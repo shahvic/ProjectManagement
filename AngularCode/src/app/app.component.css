@@ -1,0 +1,31 @@
+.container {
+    width: 100%;
+    background: rgb(169, 168, 247);
+    height: 100%;
+    font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+    font-size: 25px;
+  }
+
+  .navbar .navbar-expand-lg .bg-primary .navbar-dark {
+      align-items: center;
+      align-content: center;
+      background-color:rgb(117, 102, 247);
+  }
+
+  .navbar-nav{
+    align-items: center;
+    width: 100%;
+    align-content: center;
+  }
+
+    .container-fluid {
+        width: 60%;
+        
+    }
+    .navbar-brand{
+        font-size: 2.00rem;
+    }
+
+    h2{
+        font-size: 1.5rem;
+    }

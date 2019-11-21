@@ -1,0 +1,39 @@
+<h2 class="text-center">Add Task</h2>
+<form>
+  <div class="form-group">
+    <label for="project">Project:</label>
+    <input [(ngModel)]="task.projectId" placeholder="Project" name="projectId" class="form-control" id="projectId">
+  </div>
+  <div class="form-group">
+    <label for="taskName"> Task:</label>
+    <input [(ngModel)]="task.taskName" placeholder="TaskName" name="taskName" class="form-control" id="taskName">
+  </div>
+  <input  type="checkbox"  [(ngModel)]="task.checkParent" name="checkParent">  Parent Task:
+  <div class="form-group">
+    <label for="priority"> Priority:</label>
+  
+   <input type="range" [(ngModel)]="task.priority" placeholder="Priority" name="priority" min="1" max="10" step="1" [disabled]="task.isParent" class="form-control" id="priority">
+  </div>
+  <div class="form-group">
+    <label for="parent"> Parent Task:</label>
+    <input [(ngModel)]="task.parentId" placeholder="Parent Task" [disabled]="task.checkParent" name="parent" class="form-control" id="parent">
+  </div>
+  <div class="form-group">
+    <label for="startDate"> Start Date:</label>
+    <input type="date" [(ngModel)]="task.startDate" placeholder="startDate" [disabled]="task.checkParent"  name="startDate" class="date" id="startDate">
+  </div>
+  <div class="form-group">
+    <label for="endDate"> End Date:</label>
+    <input type="date" [(ngModel)]="task.endDate" placeholder="endDate" [disabled]="task.checkParent"  name="endDate" class="date" id="endDate">
+  </div>
+  <div class="form-group">
+    <label for="status"> Status:</label>
+    <input [(ngModel)]="task.status" placeholder="Status" name="status" [disabled]="task.checkParent"  class="form-control" id="status">
+  </div>
+  <div class="form-group">
+    <label for="employeeId"> Employee ID:</label>
+    <input [(ngModel)]="task.employeeId" placeholder="Employee ID"  [disabled]="task.checkParent"  name="employeeId" class="form-control" id="employeeId">
+  </div>
+  <button class="btn btn-success" (click)="createTask()">Add Task</button>
+  <div class="text-danger" *ngIf="error.isError">{{error.errorMessage}}</div>
+</form>

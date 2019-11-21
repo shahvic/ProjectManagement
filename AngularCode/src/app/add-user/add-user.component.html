@@ -1,0 +1,54 @@
+<h2 class="text-center">Add User</h2>
+  <form  #yourForm="ngForm">
+    <div class="form-group">
+      <label for="firstName">First Name:</label><input [(ngModel)]="user.firstName" placeholder="First Name" name="firstName" class="form-control" id="firstName" required ngModel>
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Last Name:</label><input [(ngModel)]="user.lastName" placeholder="Last name" name="lastName" class="form-control" id="lastName" required ngModel>
+    </div>
+    <div class="form-group">
+      <label for="employeeId">Employee ID:</label><input type="empID" [(ngModel)]="user.employeeId" placeholder="Emplaoyee ID" name="employeeId" class="form-control" id="employeeId" required ngModel>
+    </div>
+    <button class="btn btn-success"  (click)="addUser()">Add User</button>
+    <div class="text-danger" *ngIf="error.isError">{{error.errorMessage}}</div>
+  </form>
+
+  <h2> User Details</h2>
+            Sort by:
+        <span (click)="sortList('employeeId')" class="by-name">EmployeeId</span>
+          <span *ngIf="key === 'employeeId'">
+            <span *ngIf="reverse"></span>
+            <span *ngIf="!reverse"></span>
+          </span>
+
+          <span (click)="sortList('firstName')" class="by-name">First Name</span>
+            <span *ngIf="key === 'firstName'">
+              <span *ngIf="reverse"></span>
+              <span *ngIf="!reverse"></span>
+          </span>
+
+          <span (click)="sortList('lastName')" class="by-name">Last Name</span>
+            <span *ngIf="key === 'lastName'">
+              <span *ngIf="reverse"></span>
+              <span *ngIf="!reverse"></span>
+          </span>
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>FirstName</th>
+      <th>LastName</th>
+      <th>Employee ID</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users | orderBy: key : reverse">
+      <td>{{user.firstName}}</td>
+      <td>{{user.lastName}}</td>
+      <td>{{user.employeeId}}</td>
+      <td><button class="btn btn-danger" (click)="deleteUser(user)">Delete User</button></td>
+    </tr>
+    </tbody>
+  </table>
+ 
