@@ -7,5 +7,5 @@ node{
   
   bat "mvn install"
   }
-
+ 
 }
